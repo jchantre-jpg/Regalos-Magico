@@ -27,5 +27,5 @@ node_modules.bak/
 # Catálogo import temporal
 app-web/bd/catalog.import.json
 
-# Manual (solo deps del script de capturas)
-docs/scripts/node_modules/
+# Manual de usuario (local / Overleaf — no subir al repo)
+docs/
