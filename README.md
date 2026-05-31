@@ -15,23 +15,24 @@ Tienda de regalos con pedido por **WhatsApp**. Repositorio unificado con la **ap
 cd app-web
 npm install
 cp .env.example .env    # PowerShell: Copy-Item .env.example .env
-npm run dev             # http://localhost:5173
+npm run dev
 npm run build           # compila a dist/
 ```
 
+- Copia `.env.example` → `.env` y configura `VITE_WHATSAPP_NUMBER` (y API si aplica).
 - Catálogo local o vía API (`VITE_USE_API` en `.env`).
-- Backend en `app-web/backend/` (puerto 8081 en desarrollo).
-- Despliegue: ver `app-web/DEPLOY-EQUIPO1.md`.
 
 ## App móvil (`app-movil/`)
 
 ```bash
 cd app-movil
 npm install
+cp .env.example .env
 npm run start:lan       # QR con Expo Go (misma Wi‑Fi)
 npm run web             # versión web con Expo
 ```
 
+- Configura WhatsApp y credenciales admin en `.env` (ver `.env.example`).
 - Catálogo empaquetado en `assets/catalog/`.
 - Regenerar catálogo: `npm run generate-catalog` (ver README interno).
 

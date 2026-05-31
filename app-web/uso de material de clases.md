@@ -196,7 +196,6 @@ Tras la refactorización, la página única **no concentra todo el JSX en un sol
 | Recurso | Sirve para |
 |---------|------------|
 | `README.md` | Puesta en marcha, scripts (`dev`, `build`, `typecheck`), estructura de `src/`, Docker y enlaces a guías. |
-| `DEPLOY-EQUIPO1.md` | Despliegue en VPS, PM2, Nginx y secretos de GitHub Actions. |
 | `uso de material de clases.md` | Evidencia curso ↔ código (este documento). |
 | `.env.example` | Lista **nombres** de variables `VITE_*` y proxy; nunca pegar contraseñas reales. |
 

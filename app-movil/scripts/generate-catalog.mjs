@@ -17,8 +17,8 @@ const ASSETS_DIR = path.join(APP_ROOT, 'assets', 'catalog'); // destino empaquet
 const OUT_FILE = path.join(APP_ROOT, 'database', 'catalog.generated.ts'); // salida TypeScript
 const OVERRIDES_FILE = path.join(APP_ROOT, 'database', 'product-copy-overrides.json'); // textos manuales
 
-/** Base remota escrita en catalog.generated.ts (fallback si no hay require local). */
-const REMOTE_IMAGE_BASE = 'https://ele5-6.apolobyte.top/imagenes';
+/** Base remota opcional en catalog.generated.ts (vacío = solo assets locales). */
+const REMOTE_IMAGE_BASE = process.env.CATALOG_IMAGE_BASE?.trim() || '';
 const EXT_RE = /\.(jpe?g|png|webp|avif)$/i;
 /** Categorías válidas en la app móvil (debe coincidir con backend/constants/categories). */
 const VALID_CATS = new Set(['desayunos', 'flores', 'chocolates', 'peluches', 'globos', 'personalizados']);

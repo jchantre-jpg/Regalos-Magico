@@ -55,7 +55,7 @@ async function handleLogin(e) {
   const errorEl = document.getElementById('login-error');
 
   try {
-    // Asegura que `API_BASE_URL` apunte al puerto correcto (8081 o 8080).
+    // Espera a que api-config.js resuelva API_BASE_URL (mismo origen /api).
     // Esto evita el problema de “login no funciona” cuando Docker/no-Docker usan distintos puertos.
     if (typeof apiBaseUrlReady !== 'undefined') await apiBaseUrlReady;
 

@@ -1,10 +1,7 @@
 /**
  * Credenciales del panel admin (solo validación local en la app).
- * Usado en AdminPanel.tryLogin — comparación de strings en el dispositivo.
- * En producción deberían validarse en un servidor seguro (no commitear secretos reales).
+ * Configurar en .env: EXPO_PUBLIC_ADMIN_USERNAME y EXPO_PUBLIC_ADMIN_PASSWORD
  */
-/** Usuario local del panel (solo validación en dispositivo). */
-export const ADMIN_USERNAME = 'admin';
+export const ADMIN_USERNAME = process.env.EXPO_PUBLIC_ADMIN_USERNAME ?? '';
 
-/** Contraseña local del panel (cambiar en producción real). */
-export const ADMIN_PASSWORD = 'regalo2026';
+export const ADMIN_PASSWORD = process.env.EXPO_PUBLIC_ADMIN_PASSWORD ?? '';

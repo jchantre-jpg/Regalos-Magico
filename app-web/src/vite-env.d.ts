@@ -10,6 +10,8 @@ interface ImportMetaEnv {
   readonly VITE_API_BASE_URL?: string;
   /** Solo desarrollo: URL del backend para el proxy `/api` en `vite.config.ts`. */
   readonly VITE_DEV_API_PROXY?: string;
+  /** Número WhatsApp (código de país + número, sin +). Definir en `.env` local. */
+  readonly VITE_WHATSAPP_NUMBER?: string;
 }
 
 interface ImportMeta {

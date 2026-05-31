@@ -29,3 +29,14 @@ app-web/bd/catalog.import.json
 
 # Manual de usuario (local / Overleaf — no subir al repo)
 docs/
+
+# Despliegue VPS y CI con datos sensibles (solo local)
+app-web/DEPLOY-EQUIPO1.md
+app-web/.github/workflows/deploy.yml
+
+# Variables de entorno locales (copiar desde .env.example)
+.env
+.env.local
+.env.*.local
+app-web/.env
+app-movil/.env

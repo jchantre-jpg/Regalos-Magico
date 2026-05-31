@@ -301,7 +301,7 @@ async function openWhatsAppWithText(message, options = {}) {
     return;
   }
 
-  window.open('https://api.whatsapp.com/send?phone=573143562274', '_blank', 'noopener,noreferrer');
+  console.warn('WhatsApp: configura el número en VITE_WHATSAPP_NUMBER (.env) o en CONFIG.');
 }
 
 // Conecta botones para:

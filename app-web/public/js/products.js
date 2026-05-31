@@ -4,11 +4,8 @@
  */
 
 const CONFIG = {
-  // Enlace directo al chat (evita /qr/ en PC, que muestra “instala WhatsApp” aunque ya lo tengas).
-  whatsappLink: 'https://api.whatsapp.com/send?phone=573143562274',
-  // Mismo número, sin + ni espacios — prioridad al armar URLs desde JS.
-  whatsappNumber: '573143562274',
-  // Mensaje predefinido para pedidos (debajo se agregan los productos que el cliente eligió)
+  whatsappLink: '',
+  whatsappNumber: '',
   orderMessage: '¡Hola! Quiero hacer un pedido desde RegaloMágico.'
 };
 

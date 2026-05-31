@@ -88,5 +88,5 @@ export async function openWhatsAppWithText(
     return;
   }
 
-  window.open('https://api.whatsapp.com/send?phone=573143562274', '_blank', 'noopener,noreferrer');
+  showWhatsAppToast('Configura VITE_WHATSAPP_NUMBER en tu archivo .env local.');
 }

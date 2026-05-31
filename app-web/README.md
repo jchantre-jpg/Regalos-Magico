@@ -23,8 +23,6 @@ Tienda web (catálogo, carrito y checkout vía WhatsApp) construida con **React 
 | `bd/` | Scripts SQL inicializados por Postgres en Docker (`001_schema.sql`, `002_seed.sql`, …) |
 | `server.js` | Servidor Express mínimo que sirve `dist/` tras `npm run build` (producción tipo SPA + `/health`) |
 | `Dockerfile`, `docker-compose.yml`, `nginx.conf` | Stack local/producción en contenedores (front + API + Postgres) |
-| `.github/workflows/` | CI (typecheck + build) y despliegue automático al hacer push a `main` |
-| `DEPLOY-EQUIPO1.md` | Guía detallada VPS, PM2, Nginx y secretos de GitHub Actions |
 | `uso de material de clases.md` | Relación temas del curso ↔ código; checklist de organización (§11). |
 
 ---
@@ -33,12 +31,13 @@ Tienda web (catálogo, carrito y checkout vía WhatsApp) construida con **React 
 
 ```bash
 npm install
-cp .env.example .env   # opcional: ajusta VITE_USE_API y proxy (en PowerShell: Copy-Item .env.example .env)
+cp .env.example .env   # PowerShell: Copy-Item .env.example .env
 npm run dev
 ```
 
-- Con **`VITE_USE_API=false`** el catálogo puede usar datos locales sin llamar al backend.
-- Con **`VITE_USE_API=true`**, Vite proxifica `/api` al destino configurado (por defecto `http://127.0.0.1:8081`; ver `VITE_DEV_API_PROXY` en `.env`).
+- Copia `.env.example` → `.env` y define `VITE_WHATSAPP_NUMBER`.
+- Con **`VITE_USE_API=false`** el catálogo usa datos locales sin llamar al backend.
+- Con **`VITE_USE_API=true`**, configura **`VITE_DEV_API_PROXY`** con la URL de tu API local.
 
 ---
 
@@ -60,7 +59,7 @@ Tras `npm run build`:
 node server.js
 ```
 
-Por defecto escucha en el puerto **3006** (variable de entorno `PORT`). Sirve archivos de `dist/` y redirige rutas al `index.html` del SPA.
+Usa la variable de entorno **`PORT`** (si no está definida, el servidor elige un puerto por defecto). Sirve archivos de `dist/` y redirige rutas al `index.html` del SPA.
 
 ---
 
@@ -72,28 +71,15 @@ En la rama que incluya `docker-compose.yml` (p. ej. `main`):
 docker compose up --build
 ```
 
-Servicios típicos:
+Servicios típicos: frontend (Nginx + SPA), backend API y PostgreSQL. Puertos y credenciales se configuran en `docker-compose.yml` y en tu `.env` local (no subir secretos al repositorio).
 
-- **Frontend** (Nginx + SPA compilada): puerto host configurable (`FRONTEND_PORT`, por defecto **3006**).
-- **Backend**: API en **8086** en el host (`BACKEND_PORT_HOST`).
-- **PostgreSQL**: puerto host **54326** (`DB_PORT_HOST`) por defecto.
-
-Variables útiles: `VITE_USE_API`, `VITE_API_BASE_URL`, `DB_*`, `ADMIN_TOKEN` (token para operaciones de administración de productos en la API). Ver comentarios en `docker-compose.yml` y `.env.example`.
+Variables útiles: `VITE_USE_API`, `VITE_API_BASE_URL`, `DB_*`, `ADMIN_TOKEN`. Ver comentarios en `docker-compose.yml` y `.env.example`.
 
 ---
 
 ## API (backend)
 
 Prefijo: **`/api`**. Endpoints públicos habituales incluyen listado de productos, creación de pedidos y comprobación de salud; la administración de catálogo usa token (`ADMIN_TOKEN`). Detalle en `backend/src/index.js`.
-
----
-
-## Ramas y despliegue
-
-- Desarrollo: ramas `dev-*` (p. ej. `dev-juliana-chantre`).
-- **Producción / CI-CD:** los pushes a **`main`** disparan el workflow de despliegue (pull en el VPS, `npm ci`, `npm run build`, reinicio PM2). No existe una rama separada llamada `prod`.
-
-Pasos y secretos (`VPS_HOST`, `VPS_USER`, `VPS_PASSWORD`): ver **`DEPLOY-EQUIPO1.md`**.
 
 ---
 

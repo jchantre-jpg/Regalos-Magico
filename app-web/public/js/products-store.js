@@ -11,7 +11,7 @@ const STORAGE_KEY = 'regalomagico_productos';
 const ADMIN_TOKEN_KEY = 'regalomagico_admin_token';
 
 // Wrapper de fetch para llamar la API.
-// - Usa `API_BASE_URL` ya “resuelto” por api-config.js (8081 vs 8080).
+// - Usa `API_BASE_URL` resuelto por api-config.js (mismo origen /api).
 // - Si hay token en sesión, adjunta Authorization: Bearer <token>
 async function apiFetch(path, options = {}) {
   // Mantiene consistencia si API_BASE_URL se resolvió por puerto.

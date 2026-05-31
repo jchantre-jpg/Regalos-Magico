@@ -26,12 +26,14 @@ export interface Product {
   contenido?: string;
 }
 
-export const CONFIG = {
-  whatsappLink: 'https://api.whatsapp.com/send?phone=573143562274',
-  whatsappNumber: '573143562274',
-  // Mensaje predefinido para pedidos (debajo se agregan los productos que el cliente eligió)
-  orderMessage: '¡Hola! Quiero hacer un pedido desde RegaloMágico.'
-} satisfies CatalogConfig;
+export const CONFIG = (() => {
+  const whatsappNumber = String(import.meta.env.VITE_WHATSAPP_NUMBER ?? '').replace(/\D/g, '');
+  return {
+    whatsappLink: whatsappNumber ? `https://api.whatsapp.com/send?phone=${whatsappNumber}` : '',
+    whatsappNumber,
+    orderMessage: '¡Hola! Quiero hacer un pedido desde RegaloMágico.',
+  };
+})() satisfies CatalogConfig;
 
 // Categorías disponibles en el catálogo.
 // `main.js` usa esto para:

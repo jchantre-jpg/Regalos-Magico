@@ -19,7 +19,7 @@ export type CatalogProduct = {
 };
 
 /** Base URL de imágenes remotas (fallback si no hay asset local). */
-export const CATALOG_IMAGE_BASE = "https://ele5-6.apolobyte.top/imagenes" as const;
+export const CATALOG_IMAGE_BASE = "" as const;
 
 /** Catálogo empaquetado en la app (require por producto). */
 export const PRODUCTOS: CatalogProduct[] = [
