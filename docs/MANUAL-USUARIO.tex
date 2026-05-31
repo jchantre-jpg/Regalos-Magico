@@ -1,0 +1,302 @@
+% =============================================================================
+%  RegaloMágico — Manual de Usuario (v1.0 · Overleaf / pdfLaTeX)
+%  Autores: Juliana Chantre Astudillo · Manuel Arturo Legarda
+%  Compilar: pdflatex MANUAL-USUARIO.tex  (dos veces, para el índice)
+% =============================================================================
+\documentclass[11pt,a4paper,oneside,openany]{scrbook}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{lmodern}
+\DeclareFontShape{T1}{lmr}{bx}{sc}{<->ssub*lmr/bx/n}{}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{inner=2.5cm, outer=2cm, top=2.4cm, bottom=2.6cm, headheight=14pt}
+
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{graphicx}
+\graphicspath{{manual-imagenes/}}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage[automark]{scrlayer-scrpage}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{placeins}
+
+\definecolor{rmGold}{HTML}{D97706}
+\definecolor{rmRose}{HTML}{BE123C}
+\definecolor{rmWarm}{HTML}{F59E0B}
+\definecolor{rmDark}{HTML}{1C1917}
+\definecolor{rmMid}{HTML}{44403C}
+\definecolor{rmLight}{HTML}{FAF5F0}
+\definecolor{rmBorder}{HTML}{D6D3D1}
+
+\hypersetup{colorlinks=true, linkcolor=rmRose, urlcolor=rmGold,
+  pdftitle={RegaloMagico - Manual de Usuario},
+  pdfauthor={Juliana Chantre Astudillo; Manuel Arturo Legarda}}
+
+\raggedbottom
+
+\RedeclareSectionCommands[
+  tocentryformat=\normalfont\bfseries,
+  tocpagenumberformat=\normalfont\bfseries,
+]{chapter}
+
+\setkomafont{chapter}{\sffamily\bfseries\Huge\color{rmDark}}
+\setkomafont{chapterprefix}{\sffamily\bfseries\color{rmGold}}
+\setkomafont{section}{\sffamily\bfseries\Large\color{rmRose}}
+\setkomafont{subsection}{\sffamily\bfseries\color{rmMid}}
+
+\clearpairofpagestyles
+\ihead{\small\sffamily\color{rmGold}\textbf{RegaloM\'agico}}
+\ohead{\small\sffamily\color{rmMid}\leftmark}
+\cfoot{\pagemark}
+\KOMAoptions{headsepline=.4pt}
+
+\newtcolorbox{tipbox}{colframe=rmGold,colback=rmGold!6!white,arc=4pt,
+  title={\sffamily\bfseries Consejo}}
+\newtcolorbox{warnbox}{colframe=rmRose,colback=rmRose!6!white,arc=4pt,
+  title={\sffamily\bfseries Atenci\'on}}
+
+\newcommand{\app}{RegaloM\'agico}
+\newcommand{\ui}[1]{\textbf{\textcolor{rmRose}{#1}}}
+\newcommand{\kbd}[1]{\texttt{\textbf{#1}}}
+
+\newcommand{\captura}[4][0.92]{%
+  \par\vspace{0.3em}%
+  \begin{figure}[!ht]
+    \centering
+    \IfFileExists{manual-imagenes/#2}{%
+      \includegraphics[width=#1\textwidth,height=0.62\textheight,keepaspectratio]{#2}%
+    }{%
+      \fbox{\parbox{0.9\textwidth}{\centering\vspace{1.2cm}
+        \sffamily Captura pendiente:\\\texttt{manual-imagenes/#2}\vspace{1.2cm}}}%
+    }
+    \caption{#3}\label{#4}
+  \end{figure}%
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace*{1.8cm}
+  {\sffamily\fontsize{40}{46}\selectfont\bfseries\color{rmGold} RegaloM\'agico\par}
+  \vspace{0.4cm}
+  {\large Tienda virtual de regalos\par}
+  \vspace{1cm}
+  {\sffamily\Huge\bfseries Manual de Usuario\par}
+  \vspace{0.6cm}
+  {\large Compra por WhatsApp: web y app m\'ovil\par}
+  \vfill
+  {\sffamily\large Juliana Chantre Astudillo\par}
+  {\sffamily\large Manuel Arturo Legarda\par}
+  \vspace{0.6cm}
+  {\sffamily Mayo 2026\par}
+  \vspace{0.4cm}
+  {\small\url{https://github.com/jchantre-jpg/Regalos-Magico}\par}
+\end{titlepage}
+
+\frontmatter
+\chapter{Presentaci\'on}
+\markboth{Presentaci\'on}{Presentaci\'on}
+
+\app{} es una tienda virtual de regalos (desayunos sorpresa, flores, peluches, chocolates, globos y m\'as). El cliente explora el cat\'alogo, arma un carrito y env\'ia el pedido por \textbf{WhatsApp}. No hay pasarela de pago en la app: la confirmaci\'on y el cobro se acuerdan por chat.
+
+El proyecto incluye:
+\begin{itemize}[noitemsep]
+  \item \textbf{Tienda web} (\texttt{app-web}): sitio responsive en el navegador.
+  \item \textbf{App m\'ovil} (\texttt{app-movil}): misma experiencia en Android/iOS con Expo.
+  \item \textbf{Panel admin}: gesti\'on de productos (web en \texttt{/admin.html} y dentro de la app m\'ovil).
+\end{itemize}
+
+\begin{tipbox}
+  Este manual cubre lo esencial para \textbf{comprar} y para \textbf{administrar} el cat\'alogo. Las capturas muestran la interfaz real de la aplicaci\'on.
+\end{tipbox}
+
+\tableofcontents
+\listoffigures
+\clearpage
+
+\mainmatter
+
+% ---------------------------------------------------------------------------
+\chapter{Requisitos y acceso}
+\markboth{Requisitos y acceso}{Requisitos y acceso}
+
+\section{Para comprar (cliente)}
+
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+\textbf{Requisito} & \textbf{Detalle} \\
+\midrule
+Navegador & Chrome, Edge, Firefox o Safari reciente (tienda web). \\
+App m\'ovil & Android o iOS con la app \app{} instalada, o versi\'on web Expo. \\
+WhatsApp & Necesario para enviar el pedido y coordinar entrega. \\
+Conexi\'on & Internet para cargar el cat\'alogo e im\'agenes. \\
+\bottomrule
+\end{tabularx}
+
+\section{Para administrar}
+
+Accede al panel con usuario \kbd{admin} y contrase\~na \kbd{regalo2026} (cambiar en producci\'on). En la web: enlace \ui{Admin} del men\'u o \url{/admin.html}. En m\'ovil: men\'u lateral $\rightarrow$ \ui{Administracion}.
+
+\begin{warnbox}
+  Las credenciales del admin m\'ovil son locales al dispositivo. El admin web valida contra el servidor API cuando est\'a desplegado.
+\end{warnbox}
+
+% ---------------------------------------------------------------------------
+\chapter{Tienda web}
+\markboth{Tienda web}{Tienda web}
+
+\section{Pantalla de inicio}
+
+Al abrir la tienda ver\'as el encabezado con logo, men\'u de secciones, icono de carrito y la secci\'on hero con el mensaje principal.
+
+\captura{01-web-inicio.png}{Pantalla de inicio con hero y acceso r\'apido al cat\'alogo}{fig:web-inicio}
+
+\section{Navegaci\'on}
+
+El men\'u superior enlaza a: \ui{Inicio}, \ui{Categor\'ias}, \ui{Productos}, \ui{¿C\'omo funciona?}, \ui{Contacto} y \ui{Admin}. El bot\'on del carrito muestra la cantidad de art\'iculos.
+
+\captura{02-web-navegacion.png}{Barra de navegaci\'on y acciones del encabezado}{fig:web-nav}
+
+\section{Categor\'ias}
+
+Despl\'azate a \ui{Categor\'ias} o usa el men\'u. Cada tarjeta representa una familia de productos (desayunos, flores, peluches, etc.). Al pulsar una categor\'ia, el cat\'alogo se filtra autom\'aticamente.
+
+\captura{03-web-categorias.png}{Grid de categor\'ias de regalos}{fig:web-cat}
+
+\section{Cat\'alogo de productos}
+
+En \ui{Productos} aparecen las tarjetas con foto, nombre, categor\'ia y precio en pesos colombianos (COP). Puedes filtrar con los botones superiores (\ui{Todos}, \ui{Desayunos}, \ui{Flores}, etc.).
+
+\captura{04-web-catalogo-productos.png}{Cat\'alogo con filtros por categor\'ia}{fig:web-catalogo}
+
+\subsection{Detalle de un producto}
+
+Pulsa \ui{Ver m\'as} o la tarjeta para abrir el modal con descripci\'on ampliada, fotos y bot\'on \ui{Agregar al carrito}.
+
+\captura{05-web-detalle-producto.png}{Modal de detalle con descripci\'on e im\'agenes}{fig:web-detalle}
+
+\section{Carrito y pedido por WhatsApp}
+
+\begin{enumerate}[noitemsep]
+  \item Pulsa \ui{Agregar} en cualquier producto.
+  \item Abre el carrito con el icono superior.
+  \item Ajusta cantidades (\ui{+} / \ui{−}) o \ui{Eliminar} l\'ineas.
+  \item Pulsa \ui{Hacer pedido} para generar el mensaje en WhatsApp con tu lista y total.
+\end{enumerate}
+
+\captura{06-web-carrito-pedido.png}{Carrito lateral con total y bot\'on de pedido WhatsApp}{fig:web-carrito}
+
+\begin{tipbox}
+  Tambi\'en puedes usar el bot\'on flotante \ui{Pedir por WhatsApp} para escribir sin productos en el carrito (consultas generales).
+\end{tipbox}
+
+\section{¿C\'omo comprar? y contacto}
+
+La secci\'on \ui{¿C\'omo funciona?} resume los tres pasos: elegir regalo, revisar pedido y enviar por WhatsApp.
+
+\captura{07-web-como-comprar.png}{Pasos del proceso de compra}{fig:web-como}
+
+En \ui{Contacto} encontrar\'as el enlace \ui{Chatear por WhatsApp} para dudas o pedidos personalizados.
+
+\captura{08-web-contacto.png}{Secci\'on de contacto con WhatsApp}{fig:web-contacto}
+
+% ---------------------------------------------------------------------------
+\chapter{App m\'ovil}
+\markboth{App m\'ovil}{App m\'ovil}
+
+La app m\'ovil replica la tienda web con interfaz adaptada al tel\'efono: barra superior fija, men\'u lateral y modales para carrito y detalle.
+
+\section{Inicio y men\'u}
+
+\captura{11-movil-inicio.png}{Pantalla principal de la app m\'ovil}{fig:movil-inicio}
+
+Abre el men\'u con el icono \ui{☰}. Desde ah\'i saltas a cualquier secci\'on o al panel de administraci\'on.
+
+\captura{12-movil-menu.png}{Men\'u lateral de navegaci\'on}{fig:movil-menu}
+
+\section{Categor\'ias y cat\'alogo}
+
+\captura{13-movil-categorias.png}{Categor\'ias en formato m\'ovil}{fig:movil-cat}
+
+\captura{14-movil-catalogo.png}{Listado de productos con precios}{fig:movil-catalogo}
+
+\section{Carrito en m\'ovil}
+
+Agrega productos con \ui{Agregar}, abre el carrito desde el icono superior y usa el bot\'on de WhatsApp para enviar el pedido.
+
+\captura{15-movil-carrito-whatsapp.png}{Modal del carrito con total y checkout WhatsApp}{fig:movil-carrito}
+
+% ---------------------------------------------------------------------------
+\chapter{Panel de administraci\'on}
+\markboth{Panel de administraci\'on}{Panel de administraci\'on}
+
+\section{Admin web}
+
+Entra en \url{/admin.html}. Inicia sesi\'on con tus credenciales de administrador.
+
+\captura{09-web-admin-login.png}{Pantalla de login del panel web}{fig:web-admin-login}
+
+Tras el login ver\'as el listado de productos, bot\'on \ui{+ Nuevo producto} y acciones para editar o eliminar.
+
+\captura{10-web-admin-productos.png}{Listado de productos en el panel web}{fig:web-admin-lista}
+
+\section{Admin en la app m\'ovil}
+
+Desde el men\'u lateral elige \ui{Administracion}. El flujo es el mismo: login, listado y formulario de producto.
+
+\captura{16-movil-admin-login.png}{Login del admin integrado en la app}{fig:movil-admin-login}
+
+\captura{17-movil-admin-listado.png}{Listado de productos en el admin m\'ovil}{fig:movil-admin-lista}
+
+\subsection{Operaciones disponibles}
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Crear} producto: nombre, categor\'ia, precio, emoji, descripci\'on, stock e im\'agenes.
+  \item \textbf{Editar} producto del cat\'alogo base (override) o productos creados en la app.
+  \item \textbf{Eliminar} productos personalizados o ocultar del cat\'alogo.
+\end{itemize}
+
+\begin{warnbox}
+  Los cambios del admin m\'ovil se guardan en el almacenamiento local del dispositivo. El admin web sincroniza con la API cuando el backend est\'a en l\'inea.
+\end{warnbox}
+
+% ---------------------------------------------------------------------------
+\chapter{Preguntas frecuentes}
+\markboth{Preguntas frecuentes}{Preguntas frecuentes}
+
+\section{¿Necesito registrarme para comprar?}
+
+No. Solo navega, agrega al carrito y env\'ia el pedido por WhatsApp.
+
+\section{¿C\'omo pago?}
+
+El pago se coordina por WhatsApp (transferencia, efectivo contra entrega, etc.) seg\'un lo acordado con la tienda.
+
+\section{¿Puedo personalizar un regalo?}
+
+S\'i. Escr\'ibenos por WhatsApp desde \ui{Contacto} o el bot\'on flotante y describe tu idea.
+
+\section{¿Olvid\'e la contrase\~na de admin?}
+
+Contacta al desarrollador o revisa la configuraci\'on del servidor (\texttt{admin-config} en m\'ovil, base de datos en web).
+
+\backmatter
+\chapter*{Cr\'editos}
+\addcontentsline{toc}{chapter}{Cr\'editos}
+
+\textbf{Autores:} Juliana Chantre Astudillo, Manuel Arturo Legarda.
+
+\textbf{Proyecto:} \app{} --- tienda virtual de regalos con checkout por WhatsApp.
+
+\textbf{Repositorio:} \url{https://github.com/jchantre-jpg/Regalos-Magico}
+
+\end{document}

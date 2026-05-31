@@ -1,0 +1,31 @@
+# Dependencias y builds
+node_modules/
+dist/
+build/
+.expo/
+.expo-web-test/
+web-build/
+
+# Entorno
+.env
+.env.local
+.env.*.local
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Claves de deploy (no subir)
+gh-regalo-magico-deploy
+gh-regalo-magico-deploy.pub
+
+# Respaldo accidental
+node_modules.bak/
+
+# Catálogo import temporal
+app-web/bd/catalog.import.json
+
+# Manual (solo deps del script de capturas)
+docs/scripts/node_modules/
